@@ -17,7 +17,6 @@ public class TexturePacker : MonoBehaviour
 	private Rect[] m_Rects;
 
 	private RenderTexture m_Atlas;
-	private TreeNode m_Tree;
 
 	protected void Start()
 	{
@@ -55,8 +54,6 @@ public class TexturePacker : MonoBehaviour
 
 	private void Render(TreeNode a_Tree)
 	{
-		m_Tree = a_Tree;
-
 		var textureNodes = a_Tree.TextureNodes.ToDictionary(node => node.Texture);
 		m_Rects = m_Textures.Select(texture => {
 			TreeNode node = textureNodes[texture];
