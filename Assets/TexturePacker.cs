@@ -13,14 +13,18 @@ public class TexturePacker : MonoBehaviour
 	private int m_MaxSize = 4096;
 	[SerializeField]
 	private Renderer m_Renderer;
-	[SerializeField]
-	private Rect[] m_Rects;
 
 	private RenderTexture m_Atlas;
+	private Dictionary<Texture, Rect> m_Rects;
 
 	protected void Start()
 	{
 		Render(Pack());
+	}
+
+	public Rect GetRect(Texture a_Texture)
+	{
+		return m_Rects[a_Texture];
 	}
 
 	private TreeNode Pack()
@@ -55,7 +59,7 @@ public class TexturePacker : MonoBehaviour
 	private void Render(TreeNode a_Tree)
 	{
 		var textureNodes = a_Tree.TextureNodes.ToDictionary(node => node.Texture);
-		m_Rects = m_Textures.Select(texture => {
+		m_Rects = m_Textures.ToDictionary(texture => texture, texture => {
 			TreeNode node = textureNodes[texture];
 			return new Rect(
 				(float)node.X / a_Tree.Width,
@@ -63,7 +67,7 @@ public class TexturePacker : MonoBehaviour
 				(float)texture.width / a_Tree.Width,
 				(float)texture.height / a_Tree.Height
 			);
-		}).ToArray();
+		});
 
 		m_Atlas = new RenderTexture(a_Tree.Width, a_Tree.Height, 0, RenderTextureFormat.ARGB32, RenderTextureReadWrite.Default);
 		m_Atlas.depth = 0;
@@ -87,8 +91,8 @@ public class TexturePacker : MonoBehaviour
 
 			float borderWidth = (float)m_Border / a_Tree.Width;
 			float borderHeight = (float)m_Border / a_Tree.Height;
-			var propertyBlocks = m_Textures.Select((texture, index) => {
-				Rect rect = m_Rects[index];
+			var propertyBlocks = m_Textures.Select(texture => {
+				Rect rect = m_Rects[texture];
 				Matrix4x4 drawMatrix = Matrix4x4.TRS(new Vector3(rect.x - borderWidth / 2, rect.y - borderHeight / 2, 0), Quaternion.identity, new Vector3(rect.width + borderWidth, rect.height + borderHeight, 0));
 				MaterialPropertyBlock propertyBlock = new MaterialPropertyBlock();
 				propertyBlock.SetTexture("_MainTex", texture);
