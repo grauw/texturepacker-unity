@@ -22,6 +22,11 @@ public class TexturePacker : MonoBehaviour
 		Render(Pack());
 	}
 
+	public Texture GetAtlas()
+	{
+		return m_Atlas;
+	}
+
 	public Rect GetRect(Texture a_Texture)
 	{
 		return m_Rects[a_Texture];
