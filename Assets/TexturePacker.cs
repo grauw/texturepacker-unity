@@ -11,8 +11,6 @@ public class TexturePacker : MonoBehaviour
 	private int m_Border = 0;
 	[SerializeField]
 	private int m_MaxSize = 4096;
-	[SerializeField]
-	private Renderer m_Renderer;
 
 	private RenderTexture m_Atlas;
 	private Dictionary<Texture, Rect> m_Rects;
@@ -79,8 +77,6 @@ public class TexturePacker : MonoBehaviour
 		m_Atlas.useMipMap = true;
 		m_Atlas.isPowerOfTwo = true;
 		m_Atlas.name = "Atlas";
-
-		m_Renderer.material.mainTexture = m_Atlas;
 
 		Mesh mesh = new Mesh();
 		mesh.vertices = new Vector3[] { new Vector3(0, 0, 0), new Vector3(0, 1, 0), new Vector3(1, 0, 0), new Vector3(1, 1, 0) };
