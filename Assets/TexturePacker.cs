@@ -13,11 +13,11 @@ public class TexturePacker : MonoBehaviour
 	private int m_MaxSize = 4096;
 
 	private RenderTexture m_Atlas;
-	private Dictionary<Texture, Rect> m_Rects;
+	private Dictionary<Texture, Rect> m_Rects = new Dictionary<Texture, Rect>();
 
-	protected void Start()
+	public void Pack()
 	{
-		Render(Pack());
+		Render(CreateTree());
 	}
 
 	public Texture GetAtlas()
@@ -30,7 +30,7 @@ public class TexturePacker : MonoBehaviour
 		return m_Rects[a_Texture];
 	}
 
-	private TreeNode Pack()
+	private TreeNode CreateTree()
 	{
 		var textures = m_Textures.OrderByDescending(texture => texture.width * texture.height);
 
