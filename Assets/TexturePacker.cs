@@ -25,6 +25,11 @@ public class TexturePacker : MonoBehaviour
 		return m_Atlas;
 	}
 
+	public bool HasTexture(Texture a_Texture)
+	{
+		return m_Rects.ContainsKey(a_Texture);
+	}
+
 	public Rect GetRect(Texture a_Texture)
 	{
 		return m_Rects[a_Texture];
