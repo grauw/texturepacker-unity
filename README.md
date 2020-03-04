@@ -8,7 +8,6 @@ Project information
 
 Packs textures on the GPU, faster and not requiring texture read access.
 
-Author: Laurens Holst <laurens.nospam@grauw.nl>  
-Site: <https://bitbucket.org/grauw/texturepackerunity>  
-Issues: <https://bitbucket.org/grauw/texturepackerunity/issues>  
-License: Simplified BSD License
+  * Author: Laurens Holst <laurens@grauw.nl>
+  * Site: <https://hg.sr.ht/~grauw/texturepackerunity>
+  * License: Simplified BSD License
